@@ -65,6 +65,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupAnimation() {
         pigAnimation.playAnimation()
+
+        pigAnimation.addAnimatorUpdateListener {
+            if (pigAnimation.frame == firstAnim.second) {
+                pigAnimation.setMinAndMaxFrame(secondAnim.first, secondAnim.second)
+            }
+        }
     }
 
     companion object {
