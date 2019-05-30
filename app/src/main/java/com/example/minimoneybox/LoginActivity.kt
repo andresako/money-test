@@ -14,14 +14,14 @@ import java.util.regex.Pattern
  */
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var btn_sign_in : Button
-    lateinit var til_email : TextInputLayout
-    lateinit var et_email : EditText
-    lateinit var til_password : TextInputLayout
-    lateinit var et_password : EditText
-    lateinit var til_name : TextInputLayout
-    lateinit var et_name : EditText
-    lateinit var pigAnimation : LottieAnimationView
+    lateinit var btn_sign_in: Button
+    lateinit var til_email: TextInputLayout
+    lateinit var et_email: EditText
+    lateinit var til_password: TextInputLayout
+    lateinit var et_password: EditText
+    lateinit var til_name: TextInputLayout
+    lateinit var et_name: EditText
+    lateinit var pigAnimation: LottieAnimationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,42 +49,28 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.input_valid, Toast.LENGTH_LONG).show()
             }
         }
-
-
     }
 
-    private fun allFieldsValid() : Boolean {
-        var allValid = false
+    private fun allFieldsValid(): Boolean {
+        til_email.error = if (isValidEmail()) null else getString(R.string.email_address_error)
+        til_password.error = if (isValidPassword()) null else getString(R.string.password_error)
+        til_name.error = if (isValidName()) null else getString(R.string.full_name_error)
 
-        if (Pattern.matches(EMAIL_REGEX, et_email.text.toString())) {
-            allValid = true
-        } else {
-            til_email.error = getString(R.string.email_address_error)
-        }
-
-        if (Pattern.matches(PASSWORD_REGEX, et_password.text.toString())) {
-            allValid = true
-        } else {
-            til_password.error = getString(R.string.password_error)
-        }
-
-        if (Pattern.matches(NAME_REGEX, et_password.text.toString())) {
-            allValid = true
-        } else {
-            til_email.error = getString(R.string.full_name_error)
-        }
-
-        return allValid
+        return isValidEmail() && isValidPassword() && isValidName()
     }
+
+    private fun isValidEmail(): Boolean = Pattern.matches(EMAIL_REGEX, et_email.text.toString())
+    private fun isValidPassword(): Boolean = Pattern.matches(PASSWORD_REGEX, et_password.text.toString())
+    private fun isValidName(): Boolean = (Pattern.matches(NAME_REGEX, et_name.text.toString()) or et_name.text.isEmpty())
 
     private fun setupAnimation() {
         pigAnimation.playAnimation()
     }
 
     companion object {
-        val EMAIL_REGEX = "[^@]+@[^.]+\\..+"
-        val NAME_REGEX = "[a-zA-Z]{6,30}"
-        val PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[A-Z]).{10,50}$"
+        const val EMAIL_REGEX = "[^@]+@[^.]+\\..+"
+        const val NAME_REGEX = "[a-zA-Z]{6,30}"
+        const val PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[A-Z]).{10,50}$"
         val firstAnim = 0 to 109
         val secondAnim = 131 to 158
     }
