@@ -1,12 +1,17 @@
-package com.example.minimoneybox
+package com.example.minimoneybox.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.TextInputLayout
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import com.airbnb.lottie.LottieAnimationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.example.minimoneybox.R
+import com.example.minimoneybox.datasource.api.RetrofitUtils
+import com.example.minimoneybox.repository.Repository
+import com.example.minimoneybox.repository.ResponseResult
+import com.example.minimoneybox.viewmodel.login.LoginFactory
+import com.example.minimoneybox.viewmodel.login.LoginViewModel
+import kotlinx.android.synthetic.main.activity_login.*
 import java.util.regex.Pattern
 
 /**
@@ -14,18 +19,15 @@ import java.util.regex.Pattern
  */
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var btn_sign_in: Button
-    lateinit var til_email: TextInputLayout
-    lateinit var et_email: EditText
-    lateinit var til_password: TextInputLayout
-    lateinit var et_password: EditText
-    lateinit var til_name: TextInputLayout
-    lateinit var et_name: EditText
-    lateinit var pigAnimation: LottieAnimationView
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        val factory = LoginFactory(Repository(RetrofitUtils.createService()))
+        viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
+
         setupViews()
     }
 
@@ -35,18 +37,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        btn_sign_in = findViewById(R.id.btn_sign_in)
-        til_email = findViewById(R.id.til_email)
-        et_email = findViewById(R.id.et_email)
-        til_password = findViewById(R.id.til_password)
-        et_password = findViewById(R.id.et_password)
-        til_name = findViewById(R.id.til_name)
-        et_name = findViewById(R.id.et_name)
-        pigAnimation = findViewById(R.id.animation)
+
+        viewModel.loginResult.observe(this, Observer {
+            when (it) {
+                is ResponseResult.Success -> Toast.makeText(this, "Login OK", Toast.LENGTH_LONG).show()
+                is ResponseResult.Error -> Toast.makeText(this, "Login fail", Toast.LENGTH_LONG).show()
+            }
+        })
 
         btn_sign_in.setOnClickListener {
             if (allFieldsValid()) {
                 Toast.makeText(this, R.string.input_valid, Toast.LENGTH_LONG).show()
+                viewModel.loginUser(et_email.text.toString().trim(), et_password.text.toString().trim())
             }
         }
     }
@@ -61,7 +63,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun isValidEmail(): Boolean = Pattern.matches(EMAIL_REGEX, et_email.text.toString())
     private fun isValidPassword(): Boolean = Pattern.matches(PASSWORD_REGEX, et_password.text.toString())
-    private fun isValidName(): Boolean = (Pattern.matches(NAME_REGEX, et_name.text.toString()) or et_name.text.isEmpty())
+    private fun isValidName(): Boolean =
+        (Pattern.matches(NAME_REGEX, et_name.text.toString()) or et_name.text.isEmpty())
 
     private fun setupAnimation() {
         pigAnimation.playAnimation()

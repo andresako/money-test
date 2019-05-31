@@ -1,7 +1,8 @@
-package com.example.minimoneybox
+package com.example.minimoneybox.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.minimoneybox.R
 
 class IndividualAccountActivity : AppCompatActivity() {
 
