@@ -1,6 +1,9 @@
 package com.example.minimoneybox.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -25,7 +28,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val factory = LoginFactory(Repository(RetrofitUtils.createService()))
+        val factory =
+            LoginFactory(Repository(RetrofitUtils.createService()), PreferenceManager.getDefaultSharedPreferences(this))
         viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
 
         setupViews()
@@ -34,23 +38,35 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         setupAnimation()
+        showLoading(false)
     }
 
     private fun setupViews() {
 
         viewModel.loginResult.observe(this, Observer {
+            showLoading(false)
             when (it) {
-                is ResponseResult.Success -> Toast.makeText(this, "Login OK", Toast.LENGTH_LONG).show()
+                is ResponseResult.Success -> {
+                    val token = it.data?.Session?.BearerToken!!
+                    viewModel.saveToken(token)
+                    viewModel.saveName(et_name.text.toString())
+
+                    startActivity(Intent(this@LoginActivity, UserAccountActivity::class.java))
+                }
                 is ResponseResult.Error -> Toast.makeText(this, "Login fail", Toast.LENGTH_LONG).show()
             }
         })
 
         btn_sign_in.setOnClickListener {
             if (allFieldsValid()) {
+                showLoading(true)
                 Toast.makeText(this, R.string.input_valid, Toast.LENGTH_LONG).show()
                 viewModel.loginUser(et_email.text.toString().trim(), et_password.text.toString().trim())
             }
         }
+
+        et_email.setText("androidtest@moneyboxapp.com")
+        et_password.setText("P455word12")
     }
 
     private fun allFieldsValid(): Boolean {
@@ -74,6 +90,10 @@ class LoginActivity : AppCompatActivity() {
                 pigAnimation.setMinAndMaxFrame(secondAnim.first, secondAnim.second)
             }
         }
+    }
+
+    private fun showLoading(show: Boolean) {
+        loading.visibility = if (show) View.VISIBLE else View.INVISIBLE
     }
 
     companion object {
