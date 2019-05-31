@@ -11,4 +11,13 @@
     <string name="password_error">Please enter a correct password</string>
     <string name="full_name_error">Please enter your full name</string>
     <string name="input_valid">Input is valid!</string>
+    <!--Strings related to user account screen-->
+    <string name="user_account_title">User Accounts</string>
+    <string name="hello_user">Hello %1$s!</string>
+    <string name="total_plan_value">Total Plan Value: £</string>
+    <!--String related to Individual Account screen-->
+    <string name="individual_account_title">Individual Account</string>
+    <string name="plan_value">Plan Value: £</string>
+    <string name="moneybox_value">Moneybox: £</string>
+    <string name="action_add_value">Add £10</string>
 </resources>

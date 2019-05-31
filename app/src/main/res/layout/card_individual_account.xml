@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.80"/>
+
+    <TextView
+            android:id="@+id/card_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline"
+            android:textSize="16sp"
+            tools:text="Card Title"/>
+
+    <TextView
+            android:id="@+id/card_plan_value_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plan_value"
+            app:layout_constraintTop_toBottomOf="@id/card_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textSize="16sp"/>
+
+    <TextView
+            android:id="@+id/card_plan_value_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/card_title"
+            app:layout_constraintLeft_toRightOf="@id/card_plan_value_title"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textSize="16sp"
+            tools:text="500"/>
+
+    <TextView
+            android:id="@+id/card_moneybox_value_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plan_value"
+            app:layout_constraintTop_toBottomOf="@id/card_plan_value_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textSize="16sp"/>
+
+    <TextView
+            android:id="@+id/card_moneybox_value_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/card_plan_value_title"
+            app:layout_constraintLeft_toRightOf="@id/card_moneybox_value_title"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textSize="16sp"
+            tools:text="50"/>
+
+    <ImageButton
+            android:id="@+id/card_arrow"
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:src="@drawable/right-arrow-button"
+            app:layout_constraintLeft_toRightOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/card_moneybox_value_title"/>
+</android.support.constraint.ConstraintLayout>
