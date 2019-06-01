@@ -12,9 +12,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"
             android:textSize="16sp"
             tools:text="Individual account title"/>
 
@@ -24,8 +24,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_individual_account_title"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginStart="@dimen/activity_margin"
             android:textSize="16sp"
             android:text="@string/plan_value"/>
 
@@ -35,8 +35,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_individual_account_title"
             app:layout_constraintLeft_toRightOf="@id/tv_plan_value_title"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"
             android:textSize="16sp"
             tools:text="500"/>
 
@@ -46,8 +46,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_plan_value_title"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginStart="@dimen/activity_margin"
             android:textSize="16sp"
             android:text="@string/moneybox_value"/>
 
@@ -57,8 +57,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_plan_value_title"
             app:layout_constraintLeft_toRightOf="@id/tv_moneybox_value_title"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"
             android:textSize="16sp"
             tools:text="50"/>
 

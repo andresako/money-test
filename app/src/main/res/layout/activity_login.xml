@@ -13,7 +13,7 @@
             android:id="@+id/img_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/activity_margin_double"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -22,9 +22,9 @@
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_email"
             app:layout_constraintTop_toBottomOf="@+id/img_logo"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="@dimen/activity_margin_double"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -42,8 +42,8 @@
             android:id="@+id/til_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"
             app:layout_constraintTop_toBottomOf="@+id/til_email">
 
         <EditText
@@ -61,8 +61,8 @@
             android:id="@+id/til_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"
             app:layout_constraintTop_toBottomOf="@+id/til_password">
 
         <EditText
@@ -92,7 +92,7 @@
     <Button
             android:id="@+id/btn_sign_in"
             style="@style/Widget.Button.Colored.Rounded"
-            android:layout_width="150dp"
+            android:layout_width="@dimen/button_width"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

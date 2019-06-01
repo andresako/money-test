@@ -3,8 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin"
         xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.Guideline
@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="@id/guideline"
-            android:textSize="16sp"
+            android:textSize="@dimen/regular_text"
             tools:text="Card Title"/>
 
     <TextView
@@ -31,8 +31,8 @@
             android:text="@string/plan_value"
             app:layout_constraintTop_toBottomOf="@id/card_title"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textSize="16sp"/>
+            android:layout_marginTop="@dimen/activity_margin"
+            android:textSize="@dimen/regular_text"/>
 
     <TextView
             android:id="@+id/card_plan_value_value"
@@ -40,8 +40,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/card_title"
             app:layout_constraintLeft_toRightOf="@id/card_plan_value_title"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textSize="16sp"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:textSize="@dimen/regular_text"
             tools:text="500"/>
 
     <TextView
@@ -51,8 +51,8 @@
             android:text="@string/plan_value"
             app:layout_constraintTop_toBottomOf="@id/card_plan_value_title"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textSize="16sp"/>
+            android:layout_marginTop="@dimen/activity_margin"
+            android:textSize="@dimen/regular_text"/>
 
     <TextView
             android:id="@+id/card_moneybox_value_value"
@@ -60,14 +60,14 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/card_plan_value_title"
             app:layout_constraintLeft_toRightOf="@id/card_moneybox_value_title"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textSize="16sp"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:textSize="@dimen/regular_text"
             tools:text="50"/>
 
-    <ImageButton
+    <ImageView
             android:id="@+id/card_arrow"
-            android:layout_width="20dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/img_arrow_width"
+            android:layout_height="@dimen/img_arrow_height"
             android:src="@drawable/right_arrow_button"
             app:layout_constraintLeft_toRightOf="@id/guideline"
             app:layout_constraintRight_toRightOf="parent"

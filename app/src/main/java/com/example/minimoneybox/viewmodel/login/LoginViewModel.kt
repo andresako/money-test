@@ -1,35 +1,54 @@
 package com.example.minimoneybox.viewmodel.login
 
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
-import com.example.minimoneybox.datasource.model.LoginResponse
+import com.example.minimoneybox.datasource.model.LoginDto
 import com.example.minimoneybox.repository.Repository
 import com.example.minimoneybox.repository.ResponseResult
 import com.example.minimoneybox.viewmodel.BaseViewModel
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 
 class LoginViewModel(
-    private val repository: Repository,
-    private val sharedPreferences: SharedPreferences
+    private val repository: Repository
 ) : BaseViewModel() {
 
-    val loginResult = MutableLiveData<ResponseResult<LoginResponse>>()
+    companion object {
+        const val EMAIL_REGEX = "[^@]+@[^.]+\\..+"
+        const val NAME_REGEX = "[a-zA-Z]{6,30}"
+        const val PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[A-Z]).{10,50}$"
+        val firstAnimation = 0 to 109
+        val secondAnimation = 131 to 158
+    }
+
+    val loginResult = MutableLiveData<String>()
 
     fun loginUser(email: String, password: String) {
         uiScope.launch {
-            loginResult.postValue(repository.getToken(email, password))
+            val result = repository.getTokenRemote(email, password)
+            when (result) {
+                is ResponseResult.Success -> {
+                    if (result.data is LoginDto) {
+                        saveUserToken(result.data.session.bearerToken)
+                        loginResult.postValue("OK")
+                    } else {
+                        loginResult.postValue("KO")
+                    }
+                }
+                is ResponseResult.Error -> loginResult.postValue(result.exception.message)
+            }
         }
     }
 
-    fun saveName(name: String) {
-        sharedPreferences.edit()
-            .putString("NAME", name)
-            .apply()
+    fun saveUserName(name: String) {
+        repository.saveUserNameLocal(name)
     }
 
-    fun saveToken(token: String) {
-        sharedPreferences.edit()
-            .putString("TOKEN", token)
-            .apply()
+    fun saveUserToken(token: String) {
+        repository.saveTokenLocal(token)
     }
+
+    fun isValidEmail(email: String): Boolean = Pattern.matches(EMAIL_REGEX, email)
+    fun isValidPassword(password: String): Boolean = Pattern.matches(PASSWORD_REGEX, password)
+    fun isValidName(name: String): Boolean =
+        (Pattern.matches(NAME_REGEX, name) or name.isEmpty())
 }

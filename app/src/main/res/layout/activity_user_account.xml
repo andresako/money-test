@@ -12,31 +12,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:textSize="16sp"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"
+            android:textSize="@dimen/regular_text"
             tools:text="Hello User"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
     <TextView
             android:id="@+id/tv_total_plan_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/total_plan_value"
-            android:textSize="16sp"
+            android:textSize="@dimen/regular_text"
             app:layout_constraintTop_toBottomOf="@id/tv_hello"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginStart="@dimen/activity_margin"/>
+
+    <TextView
+            android:id="@+id/tv_total_plan_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/regular_text"
+            app:layout_constraintTop_toBottomOf="@id/tv_hello"
+            app:layout_constraintLeft_toRightOf="@id/tv_total_plan_title"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"
+            tools:text="5000"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_individual_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_total_plan_title"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"/>
+
+    <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
