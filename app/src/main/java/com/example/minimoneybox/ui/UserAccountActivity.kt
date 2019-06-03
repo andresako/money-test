@@ -1,5 +1,6 @@
 package com.example.minimoneybox.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
@@ -39,6 +40,11 @@ class UserAccountActivity : AppCompatActivity(), OnItemInteractionListener {
         viewModel = ViewModelProviders.of(this, factory).get(UserAccountViewModel::class.java)
 
         setupViews()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        shouldShowLoading(true)
         viewModel.getInvestorsProducts()
     }
 
@@ -70,8 +76,13 @@ class UserAccountActivity : AppCompatActivity(), OnItemInteractionListener {
     }
 
     override fun onClick(position: Int) {
-        val productName = (rv_individual_product.adapter as ProductAdapter).dataset[position].product.name
-        Toast.makeText(this, productName, Toast.LENGTH_LONG).show()
+        val product = (rv_individual_product.adapter as ProductAdapter).dataset[position]
+        val intent = Intent(this@UserAccountActivity, IndividualAccountActivity::class.java)
+        intent.putExtra("ID", product.id)
+        intent.putExtra("NAME", product.product.name)
+        intent.putExtra("PLAN_VALUE", product.planValue.toString())
+        intent.putExtra("MONEYBOX_VALUE", product.moneybox.toString())
+        startActivity(intent)
     }
 }
 

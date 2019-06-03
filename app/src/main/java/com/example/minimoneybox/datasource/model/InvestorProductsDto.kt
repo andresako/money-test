@@ -10,6 +10,8 @@ data class InvestorProductsDto(
 )
 
 data class ProductResponsesEntity(
+    @SerializedName("Id")
+    val id: Int,
     @SerializedName("PlanValue")
     val planValue: Double,
     @SerializedName("Moneybox")

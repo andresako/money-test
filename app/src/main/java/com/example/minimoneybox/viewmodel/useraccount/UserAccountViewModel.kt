@@ -15,17 +15,15 @@ class UserAccountViewModel(
     val investorProductsError = MutableLiveData<String>()
 
     fun getInvestorsProducts() {
-        val token = repository.getTokenLocal()
-        if (!token.isNullOrEmpty())
-            uiScope.launch {
-                val result = repository.getInvestorProductsRemote(token)
-                when (result) {
-                    is ResponseResult.Success -> {
-                        investorProductsResult.postValue(result.data)
-                    }
-                    is ResponseResult.Error -> investorProductsError.postValue(result.exception.message)
+        uiScope.launch {
+            val result = repository.getInvestorProductsRemote()
+            when (result) {
+                is ResponseResult.Success -> {
+                    investorProductsResult.postValue(result.data)
                 }
+                is ResponseResult.Error -> investorProductsError.postValue(result.exception.message)
             }
+        }
     }
 
     fun getUserName(): String? {

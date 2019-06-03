@@ -1,8 +1,6 @@
 package com.example.minimoneybox.datasource.api
 
-import com.example.minimoneybox.datasource.model.InvestorProductsDto
-import com.example.minimoneybox.datasource.model.LoginRequest
-import com.example.minimoneybox.datasource.model.LoginDto
+import com.example.minimoneybox.datasource.model.*
 import kotlinx.coroutines.Deferred
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -18,6 +16,12 @@ interface ApiService {
 
     @GET("investorproducts")
     fun getInvestorProducts(
-        @Header("Authorization") token : String
+        @Header("Authorization") token: String
     ): Deferred<InvestorProductsDto>
+
+    @POST("oneoffpayments")
+    fun addPayment(
+        @Header("Authorization") token: String,
+        @Body onePayment: OnePaymentRequest
+    ): Deferred<OnePaymentDto>
 }

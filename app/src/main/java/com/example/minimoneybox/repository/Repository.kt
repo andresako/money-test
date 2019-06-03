@@ -3,9 +3,7 @@ package com.example.minimoneybox.repository
 
 import android.content.SharedPreferences
 import com.example.minimoneybox.datasource.api.ApiService
-import com.example.minimoneybox.datasource.model.InvestorProductsDto
-import com.example.minimoneybox.datasource.model.LoginDto
-import com.example.minimoneybox.datasource.model.LoginRequest
+import com.example.minimoneybox.datasource.model.*
 
 class Repository(
     private val apiService: ApiService,
@@ -40,10 +38,21 @@ class Repository(
         return sharedPreferences.getString("TOKEN", null)
     }
 
-    suspend fun getInvestorProductsRemote(token: String): ResponseResult<InvestorProductsDto> {
+    suspend fun getInvestorProductsRemote(): ResponseResult<InvestorProductsDto> {
         return try {
-            val bearerToken = "Bearer $token"
+            val bearerToken = "Bearer ${getTokenLocal()}"
             val result = apiService.getInvestorProducts(bearerToken).await()
+            ResponseResult.Success(result)
+        } catch (e: Exception) {
+            ResponseResult.Error(e)
+        }
+    }
+
+    suspend fun addPayment(amount: Double, id: Int): ResponseResult<OnePaymentDto> {
+        return try {
+            val bearerToken = "Bearer ${getTokenLocal()}"
+            val paymentRequest = OnePaymentRequest(amount, id)
+            val result = apiService.addPayment(bearerToken, paymentRequest).await()
             ResponseResult.Success(result)
         } catch (e: Exception) {
             ResponseResult.Error(e)
