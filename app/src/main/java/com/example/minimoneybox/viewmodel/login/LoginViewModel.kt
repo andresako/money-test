@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.minimoneybox.datasource.model.LoginDto
 import com.example.minimoneybox.repository.Repository
 import com.example.minimoneybox.repository.ResponseResult
+import com.example.minimoneybox.utils.ResultUtils
 import com.example.minimoneybox.viewmodel.BaseViewModel
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
@@ -29,9 +30,9 @@ class LoginViewModel(
                 is ResponseResult.Success -> {
                     if (result.data is LoginDto) {
                         saveUserToken(result.data.session.bearerToken)
-                        loginResult.postValue("OK")
+                        loginResult.postValue(ResultUtils.KEY_OK)
                     } else {
-                        loginResult.postValue("KO")
+                        loginResult.postValue(ResultUtils.KEY_ERROR)
                     }
                 }
                 is ResponseResult.Error -> loginResult.postValue(result.exception.message)

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.minimoneybox.datasource.model.OnePaymentDto
 import com.example.minimoneybox.repository.Repository
 import com.example.minimoneybox.repository.ResponseResult
+import com.example.minimoneybox.utils.ResultUtils
 import com.example.minimoneybox.viewmodel.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -21,7 +22,7 @@ class IndividualAccountViewModel(
                 is ResponseResult.Success -> {
                     if (result.data is OnePaymentDto)
                         paymentResult.postValue(result.data.moneybox)
-                    else paymentError.postValue("KO")
+                    else paymentError.postValue(ResultUtils.KEY_ERROR)
                 }
                 is ResponseResult.Error -> {
                     paymentError.postValue(result.exception.message)

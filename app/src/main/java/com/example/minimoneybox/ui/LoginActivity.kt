@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.minimoneybox.R
 import com.example.minimoneybox.datasource.api.RetrofitUtils
 import com.example.minimoneybox.repository.Repository
+import com.example.minimoneybox.utils.ResultUtils
 import com.example.minimoneybox.viewmodel.login.LoginFactory
 import com.example.minimoneybox.viewmodel.login.LoginViewModel
 import com.example.minimoneybox.viewmodel.login.LoginViewModel.Companion.firstAnimation
@@ -47,15 +48,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-
         viewModel.loginResult.observe(this, Observer {
             shouldShowLoading(false)
             when (it) {
-                "OK" -> {
+                ResultUtils.KEY_OK -> {
                     viewModel.saveUserName(et_name.text.toString())
                     startActivity(Intent(this@LoginActivity, UserAccountActivity::class.java))
+                    finish()
                 }
-                "KO" -> Toast.makeText(this, "Login fail", Toast.LENGTH_LONG).show()
+                ResultUtils.KEY_ERROR -> Toast.makeText(this, getString(R.string.login_error), Toast.LENGTH_LONG).show()
                 else -> Toast.makeText(this, it, Toast.LENGTH_LONG).show()
             }
         })
@@ -93,6 +94,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun shouldShowLoading(show: Boolean) {
+        btn_sign_in.isEnabled = !show
         loading.visibility = if (show) View.VISIBLE else View.INVISIBLE
     }
 }

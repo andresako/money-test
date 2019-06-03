@@ -17,6 +17,7 @@ import com.example.minimoneybox.datasource.api.RetrofitUtils
 import com.example.minimoneybox.datasource.model.InvestorProductsDto
 import com.example.minimoneybox.datasource.model.ProductResponsesEntity
 import com.example.minimoneybox.repository.Repository
+import com.example.minimoneybox.utils.IntentUtils
 import com.example.minimoneybox.viewmodel.useraccount.UserAccountFactory
 import com.example.minimoneybox.viewmodel.useraccount.UserAccountViewModel
 import kotlinx.android.synthetic.main.activity_user_account.*
@@ -78,10 +79,10 @@ class UserAccountActivity : AppCompatActivity(), OnItemInteractionListener {
     override fun onClick(position: Int) {
         val product = (rv_individual_product.adapter as ProductAdapter).dataset[position]
         val intent = Intent(this@UserAccountActivity, IndividualAccountActivity::class.java)
-        intent.putExtra("ID", product.id)
-        intent.putExtra("NAME", product.product.name)
-        intent.putExtra("PLAN_VALUE", product.planValue.toString())
-        intent.putExtra("MONEYBOX_VALUE", product.moneybox.toString())
+        intent.putExtra(IntentUtils.KEY_ID, product.id)
+        intent.putExtra(IntentUtils.KEY_NAME, product.product.name)
+        intent.putExtra(IntentUtils.KEY_PLAN_VALUE, product.planValue.toString())
+        intent.putExtra(IntentUtils.KEY_MONEYBOX_VALUE, product.moneybox.toString())
         startActivity(intent)
     }
 }
