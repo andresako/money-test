@@ -1,3 +1,28 @@
+# Solution
+Under each commit you can find the changes I made. Providing a title and the description of the action taken
+
+## Part A - Fix bugs
+
+### Bug 1 - Layout does not look as expected
+First make sure that all the component in the layout have a proper name.
+Using the Constraint Layout, I ordered them as the image provided.
+I'm using a 32dp margin on top and 16dp for each side.
+The animation and the button are in a chain group centered in the remaining space of the screen.
+The animation have a scale of 0.2 trying to match as much as possible the reference.
+
+### Bug 2 - Validation is incorrect
+Separate validation from the error message (in case there is any).
+Each field have a separate function to validate them individually.
+Each error is checked separately and re-evaluated after clicking the button.
+Only if all the validation are correct, the "Input valid" tooltip is shown.
+
+### Bug 3 - Animation is looping incorrectly
+Added the parameter "Loop" into the xml to make sure is repeated forever.
+Added the animationUpdateListener to track the frame is displayed.
+Once the animation reach the frame 109 the first frame in the loop is changed to be the frame 131.
+
+
+
 # The Brief:
 
 Create a mini version of the Moneybox app that will allow existing users to login, check their account and add money to their moneybox.
