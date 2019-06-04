@@ -34,6 +34,8 @@ In this screen the user can check the individual account and add money to their 
 The data is provided by the previous screen via Intent.
 Once the user click to add money, the new value is shown if everything goes right.
 
+# Notes
+
 #### The application is full coded in Kotlin.
 #### MVVM pattern to separate the view, from the data, from the repository.
 #### I tried to keep it as clean as possible avoiding any hardcoded string or value using the proper file for it.
