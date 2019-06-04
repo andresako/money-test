@@ -21,6 +21,26 @@ Added the parameter "Loop" into the xml to make sure is repeated forever.
 Added the animationUpdateListener to track the frame is displayed.
 Once the animation reach the frame 109 the first frame in the loop is changed to be the frame 131.
 
+## Part B - Add 2 new screens
+
+### Screen 2 - User accounts screen
+Simple screen same as the login, working with a ViewModel for all the logic, I decided to get the data every time the user reach this screen to get the most updated information.
+I added to this screen 2 TextView, first for "Hello user!" in case the full name is provided, the second one to display the TotalPlanValue
+Below that a RecyclerView to auto-populate all the different Accounts that the user can have.
+Clicking in one of the item will allow the user to go to the next screen.
+
+### Screen 3 - Individual account screen
+In this screen the user can check the individual account and add money to their Moneybox account.
+The data is provided by the previous screen via Intent.
+Once the user click to add money, the new value is shown if everything goes right.
+
+#### The application is full coded in Kotlin.
+#### MVVM pattern to separate the view, from the data, from the repository.
+#### I tried to keep it as clean as possible avoiding any hardcoded string or value using the proper file for it.
+#### Values like User Name or token is stored in Shared Preferences for simplicity, in case that more data is needed offline, I will use Room.
+#### Values for the third screen is passed via Intent to avoid duplication.
+#### All the calls are prepared to receive an Error and display it in screen if something goes wrong.
+
 
 
 # The Brief:
